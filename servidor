@@ -1,0 +1,14 @@
+from flask import Flask, request
+from mooc.Comics.Servicios.Autentidicacion import autenticacion
+app = Flask(__name__)
+
+
+
+#--------------------------USUARIO|LOGIN-------------------------------
+@app.route('/login', methods=['POST'])
+def login():
+    datos_login = request.get_json()
+    respuesta = autenticacion.login_usuario(datos_login['nombre'], datos_login['contraseña'])
+    return respuesta
+
+

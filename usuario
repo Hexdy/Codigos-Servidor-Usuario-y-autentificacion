@@ -1,0 +1,26 @@
+from mooc.Comics.Datos.base_de_datos import BaseDeDatos
+
+
+def crear_usuarios(nombre, contraseña, rol):
+    sql_tabla_usuarios = f"""
+        INSERT INTO USUARIO(nombre, contraseña, rol)
+        VALUES ('{nombre}','{contraseña}', '{rol}')
+    """
+    bd = BaseDeDatos()
+    bd.ejecutar_sql(sql_tabla_usuarios)
+
+
+def login(nombre, contraseña):
+    sql_login = f"""
+    SELECT nombre FROM USUARIO WHERE nombre = '{nombre}' AND contraseña = '{contraseña}'
+"""
+
+    bd = BaseDeDatos()
+    lista = bd.ejecutar_sql(sql_login)
+    token = {'TOKEN':'ACCESO_PERMITIDO'}
+    if len(lista)>0:
+        return "OK",200, token
+    else:
+        token = {'TOKEN': ''}
+        return "NOT FOUND", 404, token
+

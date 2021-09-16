@@ -1,0 +1,9 @@
+from mooc.Comics.Datos.modelos import usuario as modelo_usuario
+
+
+def crear_usuario(nombre, contraseña, rol):
+    modelo_usuario.crear_usuarios(nombre, contraseña, rol)
+
+def login_usuario(nombre, contraseña):
+    respuesta = modelo_usuario.login(nombre, contraseña)
+    return respuesta
